@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackageId>quickpay.sdk</PackageId>
+    <Company />
+    <Product>QuickPay SDK</Product>
+    <Description>QuickPay SDK for .NET Core</Description>
+    <PackageProjectUrl>https://github.com/ellern/quickpay-sdk-dotnet</PackageProjectUrl>
+    <Authors>ellern</Authors>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/ellern/quickpay-sdk-dotnet</RepositoryUrl>
+    <PackageTags>quickpay;sdk;client</PackageTags>
+  </PropertyGroup>
+ 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>

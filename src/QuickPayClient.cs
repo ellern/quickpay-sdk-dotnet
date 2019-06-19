@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using QuickPay.Clients;
-using QuickPay.Models.Shared;
+using QuickPay.SDK.Clients;
+using QuickPay.SDK.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickPay
+namespace QuickPay.SDK
 {
     public class QuickPayClient
     {

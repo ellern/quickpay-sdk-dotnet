@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace QuickPay.Models.Shared
+namespace QuickPay.SDK.Models.Shared
 {
     public class Operation
     {

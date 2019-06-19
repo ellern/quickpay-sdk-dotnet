@@ -1,8 +1,8 @@
-﻿using QuickPay.Models.Invoices;
+﻿using QuickPay.SDK.Models.Invoices;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace QuickPay.Clients
+namespace QuickPay.SDK.Clients
 {
     public class InvoicesClient : BaseClient
     {

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace QuickPay.Models.Invoices
+namespace QuickPay.SDK.Models.Invoices
 {
     public class InvoiceOrder
     {

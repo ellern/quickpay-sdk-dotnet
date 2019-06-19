@@ -1,6 +1,6 @@
-﻿using QuickPay.Models.Shared;
+﻿using QuickPay.SDK.Models.Shared;
 
-namespace QuickPay.Models.Cards
+namespace QuickPay.SDK.Models.Cards
 {
     public class CardMetadata : Metadata
     {

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <PackageId>quickpay.sdk</PackageId>
+    <PackageId>QuickPay.SDK</PackageId>
     <Company />
     <Product>QuickPay SDK</Product>
     <Description>QuickPay SDK for .NET Core</Description>
@@ -11,6 +11,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/ellern/quickpay-sdk-dotnet</RepositoryUrl>
     <PackageTags>quickpay;sdk;client</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
  
   <ItemGroup>

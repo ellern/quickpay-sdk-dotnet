@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using QuickPay.Models.Shared;
+using QuickPay.SDK.Models.Shared;
 using System;
 using System.Collections.Generic;
 
-namespace QuickPay.Models.Callbacks
+namespace QuickPay.SDK.Models.Callbacks
 {
     public class Callback
     {

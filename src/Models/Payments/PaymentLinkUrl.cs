@@ -1,4 +1,4 @@
-﻿namespace QuickPay.Models.Payments
+﻿namespace QuickPay.SDK.Models.Payments
 {
     public class PaymentLinkUrl
     {

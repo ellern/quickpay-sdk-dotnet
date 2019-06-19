@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace QuickPay.Clients
+namespace QuickPay.SDK.Clients
 {
     public class BaseClient
     {

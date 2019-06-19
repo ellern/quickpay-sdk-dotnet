@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace QuickPay.Models.Fees
+namespace QuickPay.SDK.Models.Fees
 {
     public class CalculatedFee
     {

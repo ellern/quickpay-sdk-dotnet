@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QuickPay
+namespace QuickPay.SDK
 {
     internal static partial class Endpoints
     {

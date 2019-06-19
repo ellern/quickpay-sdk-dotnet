@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using QuickPay.Models.Shared;
+using QuickPay.SDK.Models.Shared;
 
-namespace QuickPay.Models.Payments
+namespace QuickPay.SDK.Models.Payments
 {
     public class PaymentLink : Link
     {

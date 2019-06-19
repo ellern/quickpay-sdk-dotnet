@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using QuickPay.Models.Cards;
+using QuickPay.SDK.Models.Cards;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace QuickPay.Clients
+namespace QuickPay.SDK.Clients
 {
     public class CardsClient : BaseClient
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace QuickPay.Models.Cards
+namespace QuickPay.SDK.Models.Cards
 {
     public class Card
     {

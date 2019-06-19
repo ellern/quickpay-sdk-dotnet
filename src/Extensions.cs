@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace QuickPay
+namespace QuickPay.SDK
 {
     internal static class StringExtensions
     {

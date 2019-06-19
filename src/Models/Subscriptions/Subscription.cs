@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
-using QuickPay.Models.Payments;
-using QuickPay.Models.Shared;
+using QuickPay.SDK.Models.Payments;
+using QuickPay.SDK.Models.Shared;
 using System;
 using System.Collections.Generic;
 
-namespace QuickPay.Models.Subscriptions
+namespace QuickPay.SDK.Models.Subscriptions
 {
     public class Subscription
     {

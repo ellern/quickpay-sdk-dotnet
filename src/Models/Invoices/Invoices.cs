@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace QuickPay.Models.Invoices
+namespace QuickPay.SDK.Models.Invoices
 {
     public class Invoices
     {

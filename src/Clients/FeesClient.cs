@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
-using QuickPay.Models.Fees;
+using QuickPay.SDK.Models.Fees;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace QuickPay.Clients
+namespace QuickPay.SDK.Clients
 {
     public class FeesClient : BaseClient
     {

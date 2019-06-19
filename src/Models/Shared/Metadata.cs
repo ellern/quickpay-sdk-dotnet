@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace QuickPay.Models.Shared
+namespace QuickPay.SDK.Models.Shared
 {
     public class Metadata
     {

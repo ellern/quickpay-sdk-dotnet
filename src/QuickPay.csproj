@@ -5,12 +5,12 @@
     <PackageId>QuickPay.SDK</PackageId>
     <Company />
     <Product>QuickPay SDK</Product>
-    <Description>QuickPay SDK for .NET Core</Description>
+    <Description>QuickPay SDK for .NET Core. Open Source client for QuickPay's API and others deriving from QuickPay such as CoolPay.</Description>
     <PackageProjectUrl>https://github.com/ellern/quickpay-sdk-dotnet</PackageProjectUrl>
     <Authors>ellern</Authors>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/ellern/quickpay-sdk-dotnet</RepositoryUrl>
-    <PackageTags>quickpay;sdk;client</PackageTags>
+    <PackageTags>quickpay;sdk;api;client;coolpay</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
  

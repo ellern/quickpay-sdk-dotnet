@@ -27,6 +27,12 @@ namespace QuickPay.SDK
         public PaymentsClient Payments { get; set; }
         public SubscriptionsClient Subscriptions { get; set; }
 
+        public QuickPayClient(string apiKey, string privateKey, string userKey)
+            : this(null, null, apiKey, privateKey, userKey)
+        {
+
+        }
+
         public QuickPayClient(string baseUrl, string baseUrlInvoicing, string apiKey, string privateKey, string userKey)
         {
             _url = baseUrl ?? "https://api.quickpay.net/";
@@ -44,7 +50,7 @@ namespace QuickPay.SDK
         }
 
         /// <summary>
-        /// Get the QuickPay API Changelog
+        /// Get the API Changelog
         /// </summary>
         /// <returns></returns>
         public async Task<string> Changelog()
@@ -78,6 +84,12 @@ namespace QuickPay.SDK
             return JsonConvert.DeserializeObject<Pong>(response);
         }
 
+        /// <summary>
+        /// Verifies the body with the checksum and private key
+        /// </summary>
+        /// <param name="checksum"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public bool Verify(string checksum, string body) => checksum.Equals(Sign(body, _privateKey));
 
         private string Sign(string value, string privateKey)

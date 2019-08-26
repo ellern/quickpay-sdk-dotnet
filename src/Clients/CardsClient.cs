@@ -49,6 +49,8 @@ namespace QuickPay.SDK.Clients
         /// <returns>CardToken</returns>
         public Task<CardToken> CreateToken(string cardId) => PostEmpty<CardToken>(Endpoints.CardsTokens(cardId));
 
+        public Task<CardLinkUrl> CreateLink(string cardId) => CreateLink(cardId, null, null, null, false);
+
         /// <summary>
         /// 
         /// </summary>

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using QuickPay.SDK.Models.Payments;
+﻿using QuickPay.SDK.Models.Payments;
 using QuickPay.SDK.Models.Subscriptions;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -23,6 +22,15 @@ namespace QuickPay.SDK.Clients
         public Task<List<Subscription>> Index(int subscriptionId) => Get<List<Subscription>>(Endpoints.Subscriptions().ExtendQuery(new Dictionary<string, string> { { "id", subscriptionId.ToString() } }));
 
         public Task<Subscription> Get(int subscriptionId) => Get<Subscription>(Endpoints.Subscriptions(subscriptionId));
+
+        /// <summary>
+        /// Creates a new subscription
+        /// </summary>
+        /// <param name="orderId">Unique order number</param>
+        /// <param name="currency">Currency</param>
+        /// <param name="description">Subscription description</param>
+        /// <returns></returns>
+        public Task<Subscription> Create(string orderId, string currency, string description) => Create(orderId, currency, description, null, null);
 
         /// <summary>
         /// Creates a new subscription
@@ -108,6 +116,21 @@ namespace QuickPay.SDK.Clients
             var data = new Dictionary<string, object>
             {
                 { "amount", amount },
+            };
+
+            return PostJson<Subscription>(Endpoints.Subscriptions(subscriptionId, "authorize"), data);
+        }
+
+        public Task<Subscription> Authorize(int subscriptionId, int amount, string cardToken)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "amount", amount },
+                { "card", new Dictionary<string, object>
+                    {
+                        { "token", cardToken }
+                    }
+                }
             };
 
             return PostJson<Subscription>(Endpoints.Subscriptions(subscriptionId, "authorize"), data);

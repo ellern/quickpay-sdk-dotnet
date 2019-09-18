@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,19 +19,33 @@ namespace QuickPay.SDK
         private readonly string _privateKey;
         private readonly string _userKey;
 
-
+        public CallbacksClient Callbacks { get; set; }
         public CardsClient Cards { get; set; }
         public FeesClient Fees { get; set; }
         public InvoicesClient Invoices { get; set; }
         public PaymentsClient Payments { get; set; }
         public SubscriptionsClient Subscriptions { get; set; }
 
+        /// <summary>
+        /// Creates a new instance of the QuickPayClient
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="privateKey"></param>
+        /// <param name="userKey"></param>
         public QuickPayClient(string apiKey, string privateKey, string userKey)
             : this(null, null, apiKey, privateKey, userKey)
         {
 
         }
 
+        /// <summary>
+        /// Creates a new instance of the QuickPayClient
+        /// </summary>
+        /// <param name="baseUrl">URL for API, if null it defaults to QuickPays standard URL</param>
+        /// <param name="baseUrlInvoicing">URL for Invoicing API, if null it defaults to QuickPays standard URL</param>
+        /// <param name="apiKey"></param>
+        /// <param name="privateKey"></param>
+        /// <param name="userKey"></param>
         public QuickPayClient(string baseUrl, string baseUrlInvoicing, string apiKey, string privateKey, string userKey)
         {
             _url = baseUrl ?? "https://api.quickpay.net/";
@@ -42,6 +55,7 @@ namespace QuickPay.SDK
             _userKey = userKey;
             _httpClient = BuildHttpClient(_url, _apiKey, null);
 
+            Callbacks = new CallbacksClient(_privateKey);
             Cards = new CardsClient(_httpClient);
             Fees = new FeesClient(_httpClient);
             Invoices = new InvoicesClient(BuildHttpClient(_urlInvoicing, _userKey, "application/vnd.api+json"));
@@ -87,38 +101,22 @@ namespace QuickPay.SDK
         /// <summary>
         /// Verifies the body with the checksum and private key
         /// </summary>
-        /// <param name="checksum"></param>
-        /// <param name="body"></param>
+        /// <param name="headerChecksum"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        public bool Verify(string checksum, string body) => checksum.Equals(Sign(body, _privateKey));
+        [Obsolete("Use QuickPayClient.Callbacks.Verify() instead")]
+        public bool Verify(string headerChecksum, string requestBody) => Callbacks.Verify(headerChecksum, requestBody);
 
-        private string Sign(string value, string privateKey)
-        {
-            var e = Encoding.UTF8;
-
-            var hmac = new HMACSHA256(e.GetBytes(privateKey));
-            byte[] b = hmac.ComputeHash(e.GetBytes(value));
-
-            var s = new StringBuilder();
-            for (int i = 0; i < b.Length; i++)
-            {
-                s.Append(b[i].ToString("x2"));
-            }
-
-            return s.ToString();
-        }
-
-        private HttpClient BuildHttpClient(string baseUrl, string authKey, string accept)
+        private HttpClient BuildHttpClient(string baseUrl, string apiKey, string accept)
         {
             var httpClient = new HttpClient
             {
                 BaseAddress = new Uri(baseUrl)
             };
 
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($":{authKey}")));
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($":{apiKey}")));
             httpClient.DefaultRequestHeaders.Add("Accept-Version", "v10");
             httpClient.DefaultRequestHeaders.Add("Accept", accept ?? "application/json");
-            httpClient.DefaultRequestHeaders.Add("language", "da");
             httpClient.DefaultRequestHeaders.Add("User-Agent", "QuickPay SDK .NET Core");
 
             return httpClient;

@@ -36,7 +36,7 @@ namespace QuickPay.SDK.Clients
             return JsonConvert.DeserializeObject<Payment>(response);
         }
 
-        public async Task<Payment> Authorize(int paymentId, int amount, string cardToken, bool autoCapture/*, Dictionary<string, string> variables*/)
+        public async Task<Payment> Authorize(int paymentId, int amount, string cardToken, bool autoCapture)
         {
             var data = new
             {

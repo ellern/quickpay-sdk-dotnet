@@ -46,10 +46,10 @@ If you instead want to use subscriptions, you'll first need to create a new subs
 
     var subscription = await quickPayClient.Subscriptions.Create("order id", "DKK", "description", "descriptor", new Dictionary<string, string> { "userId", "et user id" } }).ConfigureAwait(false);
 
-Create a link to where the customer can fill in credit card information and authorize the subscription.
+Create a link and redirect the customer to the returned `link.Url`, where the customer can fill in card information and authorize the subscription.
 
     var link = await quickPayClient.Subscriptions.CreateOrUpdatePaymentLink(subscription.Id, 100, false, "da", "paymentMethods", "ContinueUrl", "CancelUrl", "CallbackUrl", true).ConfigureAwait(false);
 
-To capture a subscription you just call the recurring method with a auto capture parameter
+To capture a payment on the subscription you need to call the recurring method with the amount you wish to withdraw and the `autoCapture` parameter set to `true` for a single call of authorize and then capture.
 
     var authorizeAndCapture = await quickpayClient.Subscriptions.Recurring(subscriptionId, "orderId", amount, false, true, "descriptor).ConfigureAwait(false);

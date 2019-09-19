@@ -98,7 +98,8 @@ namespace QuickPay.SDK.Clients
 
         internal virtual Task<HttpResponseMessage> PostJson<T>(Uri endpoint, T data) => _httpClient.PostAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
 
-        internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.PatchAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+        //internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.PatchAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")); // Patch extension only available in netstandard2.1
+        internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json") });
 
         internal virtual async Task<T> PostJson<T>(Uri endpoint, Dictionary<string, object> data)
         {
@@ -109,7 +110,8 @@ namespace QuickPay.SDK.Clients
 
         internal virtual async Task<T> PatchJson<T>(Uri endpoint, Dictionary<string, object> data)
         {
-            var request = await _httpClient.PatchAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+            //var request = await _httpClient.PatchAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")).ConfigureAwait(false); // Patch extension only available in netstandard2.1
+            var request = await _httpClient.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json") }).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<T>(response);
         }

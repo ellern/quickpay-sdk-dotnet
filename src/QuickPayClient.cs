@@ -114,7 +114,7 @@ namespace QuickPay.SDK
                 BaseAddress = new Uri(baseUrl)
             };
 
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($":{apiKey}")));
+            if (!string.IsNullOrEmpty(apiKey)) httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($":{apiKey}")));
             httpClient.DefaultRequestHeaders.Add("Accept-Version", "v10");
             httpClient.DefaultRequestHeaders.Add("Accept", accept ?? "application/json");
             httpClient.DefaultRequestHeaders.Add("User-Agent", "QuickPay SDK .NET Core");

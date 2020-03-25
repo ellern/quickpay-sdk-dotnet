@@ -24,6 +24,7 @@ namespace QuickPay.SDK
         public FeesClient Fees { get; set; }
         public InvoicesClient Invoices { get; set; }
         public PaymentsClient Payments { get; set; }
+        public PayoutsClient Payouts { get; set; }
         public SubscriptionsClient Subscriptions { get; set; }
 
         /// <summary>
@@ -60,6 +61,7 @@ namespace QuickPay.SDK
             Fees = new FeesClient(_httpClient);
             Invoices = new InvoicesClient(BuildHttpClient(_urlInvoicing, _userKey, "application/vnd.api+json"));
             Payments = new PaymentsClient(_httpClient);
+            Payouts = new PayoutsClient(_httpClient);
             Subscriptions = new SubscriptionsClient(_httpClient);
         }
 
@@ -114,7 +116,11 @@ namespace QuickPay.SDK
                 BaseAddress = new Uri(baseUrl)
             };
 
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($":{apiKey}")));
+            if (!string.IsNullOrWhiteSpace(apiKey))
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($":{apiKey}")));
+            }
+
             httpClient.DefaultRequestHeaders.Add("Accept-Version", "v10");
             httpClient.DefaultRequestHeaders.Add("Accept", accept ?? "application/json");
             httpClient.DefaultRequestHeaders.Add("User-Agent", "QuickPay SDK .NET Core");

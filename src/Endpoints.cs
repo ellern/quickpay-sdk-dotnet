@@ -24,6 +24,9 @@ namespace QuickPay.SDK
         public static Uri Payments(int paymentId, string action) => $"payments/{paymentId}/{action}".FormatUri();
         public static Uri PaymentsAuthorize(int paymentId) => $"payments/{paymentId}/authorize".FormatUri();
         public static Uri PaymentsCapture(int paymentId) => $"payments/{paymentId}/capture".FormatUri();
+        public static Uri Payouts() => "payouts".FormatUri();
+        public static Uri Payouts(int payoutId) => $"payouts/{payoutId}".FormatUri();
+        public static Uri Payouts(int payoutId, string action) => $"payouts/{payoutId}/{action}".FormatUri();
         public static Uri Ping() => "ping".FormatUri();
         public static Uri Subscriptions() => "subscriptions".FormatUri();
         public static Uri Subscriptions(int subscriptionId) => $"subscriptions/{subscriptionId}".FormatUri();

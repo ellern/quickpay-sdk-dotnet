@@ -68,7 +68,9 @@ namespace QuickPay.SDK.Clients
             return PatchJson<Subscription>(Endpoints.Subscriptions(subscriptionId), data);
         }
 
-        public Task<PaymentLinkUrl> CreateOrUpdatePaymentLink(int subscriptionId, int amount, bool autoFee, string language, string paymentMethods, string continueUrl, string cancelUrl, string callbackUrl, bool framed)
+        public Task<PaymentLinkUrl> CreateOrUpdatePaymentLink(int subscriptionId, int amount, bool autoFee, string language, string paymentMethods, string continueUrl, string cancelUrl, string callbackUrl, bool framed) => CreateOrUpdatePaymentLink(subscriptionId, amount, autoFee, language, paymentMethods, continueUrl, cancelUrl, callbackUrl, framed, null);
+
+        public Task<PaymentLinkUrl> CreateOrUpdatePaymentLink(int subscriptionId, int amount, bool autoFee, string language, string paymentMethods, string continueUrl, string cancelUrl, string callbackUrl, bool framed, string brandingId)
         {
             var data = new Dictionary<string, object>
             {
@@ -104,6 +106,11 @@ namespace QuickPay.SDK.Clients
             if (framed)
             {
                 data["framed"] = true;
+            }
+
+            if (brandingId != null)
+            {
+                data["branding_id"] = brandingId;
             }
 
             return PutJson<PaymentLinkUrl>(Endpoints.Subscriptions(subscriptionId, "link"), data);

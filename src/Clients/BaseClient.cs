@@ -98,12 +98,44 @@ namespace QuickPay.SDK.Clients
 
         internal virtual Task<HttpResponseMessage> PostJson<T>(Uri endpoint, T data) => _httpClient.PostAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
 
+        internal virtual Task<HttpResponseMessage> PostJson<T>(Uri endpoint, T data, Dictionary<string, string> headers)
+        {
+            var stringContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+            if (headers != null)
+            {
+                foreach (var header in headers)
+                {
+                    stringContent.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            return _httpClient.PostAsync(endpoint, stringContent);
+        }
+
         //internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.PatchAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")); // Patch extension only available in netstandard2.1
         internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json") });
 
         internal virtual async Task<T> PostJson<T>(Uri endpoint, Dictionary<string, object> data)
         {
             var request = await _httpClient.PostAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+            var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<T>(response);
+        }
+
+        internal virtual async Task<T> PostJson<T>(Uri endpoint, Dictionary<string, object> data, Dictionary<string, string> headers)
+        {
+            var stringContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+            if (headers != null)
+            {
+                foreach (var header in headers)
+                {
+                    stringContent.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            var request = await _httpClient.PostAsync(endpoint, stringContent).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<T>(response);
         }

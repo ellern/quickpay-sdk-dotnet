@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>QuickPay.SDK</PackageId>
     <Company />
-    <Version>1.0.4</Version>
+    <Version>1.1.0</Version>
     <Product>QuickPay SDK</Product>
     <Description>QuickPay SDK for .NET Core. Open Source client for QuickPay's API and others deriving from QuickPay such as CoolPay.</Description>
     <PackageProjectUrl>https://github.com/ellern/quickpay-sdk-dotnet</PackageProjectUrl>
@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.2.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />

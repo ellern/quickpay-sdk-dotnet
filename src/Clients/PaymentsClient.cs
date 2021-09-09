@@ -71,6 +71,25 @@ namespace QuickPay.SDK.Clients
             return JsonConvert.DeserializeObject<Payment>(response);
         }
 
+        public async Task<Payment> Capture(int paymentId, int amount, string callbackUrl)
+        {
+            var data = new
+            {
+                amount = amount
+            };
+
+            Dictionary<string, string> headers = null;
+
+            if (callbackUrl != null)
+            {
+                headers.Add("QuickPay-Callback-Url", callbackUrl);
+            }
+
+            var request = await PostJson(Endpoints.PaymentsCapture(paymentId), data, headers).ConfigureAwait(false);
+            var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<Payment>(response);
+        }
+
         public Task<Payment> Cancel(int paymentId) => PostEmpty<Payment>(Endpoints.Payments(paymentId, "cancel"));
 
         public async Task<Payment> Refund(int paymentId, int amount)

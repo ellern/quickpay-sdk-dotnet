@@ -347,7 +347,10 @@ namespace QuickPay.SDK.Clients
 
             if (callbackUrl != null)
             {
-                headers.Add("QuickPay-Callback-Url", callbackUrl);
+                headers = new Dictionary<string, string>
+                {
+                    { "QuickPay-Callback-Url", callbackUrl }
+                };
             }
 
             var httpResponseMessage = await PostJson(Endpoints.Subscriptions(subscriptionId, "recurring"), data, headers).ConfigureAwait(false);

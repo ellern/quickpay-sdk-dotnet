@@ -23,20 +23,30 @@ namespace QuickPay.SDK.Clients
 
         public Task<Payment> Get(int paymentId) => Get<Payment>(Endpoints.Payments(paymentId));
 
-        public async Task<Payment> Session(int paymentId, int amount)
+        public async Task<Payment> Session(int paymentId, int amount, string callbackUrl)
         {
             var data = new
             {
                 amount
             };
 
-            var request = await PostJson(Endpoints.Payments(paymentId, "session"), data).ConfigureAwait(false);
+            Dictionary<string, string> headers = null;
+
+            if (callbackUrl != null)
+            {
+                headers = new Dictionary<string, string>
+                {
+                    { "QuickPay-Callback-Url", callbackUrl }
+                };
+            }
+
+            var request = await PostJson(Endpoints.Payments(paymentId, "session"), data, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             return JsonConvert.DeserializeObject<Payment>(response);
         }
 
-        public async Task<Payment> Authorize(int paymentId, int amount, string cardToken, bool autoCapture)
+        public async Task<Payment> Authorize(int paymentId, int amount, string cardToken, bool autoCapture, string callbackUrl)
         {
             var data = new
             {
@@ -54,22 +64,22 @@ namespace QuickPay.SDK.Clients
                 //}
             };
 
-            var request = await PostJson(Endpoints.PaymentsAuthorize(paymentId), data).ConfigureAwait(false);
-            var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Payment>(response);
-        }
+            Dictionary<string, string> headers = null;
 
-        public async Task<Payment> Capture(int paymentId, int amount)
-        {
-            var data = new
+            if (callbackUrl != null)
             {
-                amount = amount
-            };
+                headers = new Dictionary<string, string>
+                {
+                    { "QuickPay-Callback-Url", callbackUrl }
+                };
+            }
 
-            var request = await PostJson(Endpoints.PaymentsCapture(paymentId), data).ConfigureAwait(false);
+            var request = await PostJson(Endpoints.PaymentsAuthorize(paymentId), data, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<Payment>(response);
         }
+
+        public Task<Payment> Capture(int paymentId, int amount) => Capture(paymentId, amount, null);
 
         public async Task<Payment> Capture(int paymentId, int amount, string callbackUrl)
         {
@@ -82,7 +92,10 @@ namespace QuickPay.SDK.Clients
 
             if (callbackUrl != null)
             {
-                headers.Add("QuickPay-Callback-Url", callbackUrl);
+                headers = new Dictionary<string, string>
+                {
+                    { "QuickPay-Callback-Url", callbackUrl }
+                };
             }
 
             var request = await PostJson(Endpoints.PaymentsCapture(paymentId), data, headers).ConfigureAwait(false);
@@ -92,21 +105,45 @@ namespace QuickPay.SDK.Clients
 
         public Task<Payment> Cancel(int paymentId) => PostEmpty<Payment>(Endpoints.Payments(paymentId, "cancel"));
 
-        public async Task<Payment> Refund(int paymentId, int amount)
+        public Task<Payment> Refund(int paymentId, int amount) => Refund(paymentId, amount, null);
+
+        public async Task<Payment> Refund(int paymentId, int amount, string callbackUrl)
         {
             var data = new
             {
                 amount = amount
             };
 
-            var request = await PostJson(Endpoints.Payments(paymentId, "refund"), data).ConfigureAwait(false);
+            Dictionary<string, string> headers = null;
+
+            if (callbackUrl != null)
+            {
+                headers = new Dictionary<string, string>
+                {
+                    { "QuickPay-Callback-Url", callbackUrl }
+                };
+            }
+
+            var request = await PostJson(Endpoints.Payments(paymentId, "refund"), data, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<Payment>(response);
         }
 
-        public async Task<Payment> Renew(int paymentId)
+        public Task<Payment> Renew(int paymentId) => Renew(paymentId, null);
+
+        public async Task<Payment> Renew(int paymentId, string callbackUrl)
         {
-            var request = await PostJson(Endpoints.Payments(paymentId, "renew")).ConfigureAwait(false);
+            Dictionary<string, string> headers = null;
+
+            if (callbackUrl != null)
+            {
+                headers = new Dictionary<string, string>
+                {
+                    { "QuickPay-Callback-Url", callbackUrl }
+                };
+            }
+
+            var request = await PostJson(Endpoints.Payments(paymentId, "renew"), (object)null, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<Payment>(response);
         }

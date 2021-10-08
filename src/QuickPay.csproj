@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>QuickPay.SDK</PackageId>
     <Company />
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <Product>QuickPay SDK</Product>
     <Description>QuickPay SDK for .NET Core. Open Source client for QuickPay's API and others deriving from QuickPay such as CoolPay.</Description>
     <PackageProjectUrl>https://github.com/ellern/quickpay-sdk-dotnet</PackageProjectUrl>

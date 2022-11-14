@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace QuickPay.SDK.Models.Fees
 {
@@ -7,25 +7,25 @@ namespace QuickPay.SDK.Models.Fees
         /// <summary>
         /// The formula
         /// </summary>
-        [JsonProperty(PropertyName = "formula")]
+        [JsonPropertyName("formula")]
         public string Formula { get; set; }
 
         /// <summary>
         /// Acquirer
         /// </summary>
-        [JsonProperty(PropertyName = "acquirer")]
+        [JsonPropertyName("acquirer")]
         public string Acquirer { get; set; }
 
         /// <summary>
         /// Payment method
         /// </summary>
-        [JsonProperty(PropertyName = "payment_method")]
+        [JsonPropertyName("payment_method")]
         public string PaymentMethod { get; set; }
 
         /// <summary>
         /// True if this is the standard fee formula
         /// </summary>
-        [JsonProperty(PropertyName = "standard")]
+        [JsonPropertyName("standard")]
         public bool Standard { get; set; }
     }
 }

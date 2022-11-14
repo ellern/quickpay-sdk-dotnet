@@ -1,10 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using QuickPay.SDK.Models.Cards;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using QuickPay.SDK.Models.Cards;
 
 namespace QuickPay.SDK.Clients
 {
@@ -55,7 +53,7 @@ namespace QuickPay.SDK.Clients
 
                 var request = await PostJson(Endpoints.Cards(), data).ConfigureAwait(false);
                 var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-                return JsonConvert.DeserializeObject<Card>(response);
+                return JSON.Deserialize<Card>(response);
             }
         }
 
@@ -118,7 +116,7 @@ namespace QuickPay.SDK.Clients
 
             var request = await PutForm(Endpoints.CardsLink(cardId), form).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<CardLinkUrl>(response);
+            return JSON.Deserialize<CardLinkUrl>(response);
         }
 
         /// <summary>
@@ -197,7 +195,7 @@ namespace QuickPay.SDK.Clients
 
             var request = await PutForm(Endpoints.CardsLink(cardId), form).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<CardLinkUrl>(response);
+            return JSON.Deserialize<CardLinkUrl>(response);
         }
 
         /// <summary>

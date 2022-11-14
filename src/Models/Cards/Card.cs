@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +13,7 @@ namespace QuickPay.SDK.Models.Cards
         /// <summary>
         /// Merchant id
         /// </summary>
-        [JsonProperty(PropertyName = "merchant_id")]
+        [JsonPropertyName("merchant_id")]
         public int MerchantId { get; set; }
         /// <summary>
         /// Accepted by acquirer
@@ -34,12 +34,12 @@ namespace QuickPay.SDK.Models.Cards
         /// <summary>
         /// Custom variables
         /// </summary>
-        [JsonProperty(PropertyName = "variables")]
+        [JsonPropertyName("variables")]
         public Dictionary<string, string> Variables { get; set; }
         /// <summary>
         /// Test mode
         /// </summary>
-        [JsonProperty(PropertyName = "test_mode")]
+        [JsonPropertyName("test_mode")]
         public bool TestMode { get; set; }
         /// <summary>
         /// Acquirer that processed the card

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace QuickPay.SDK.Models.Invoices
 {
@@ -7,16 +7,16 @@ namespace QuickPay.SDK.Models.Invoices
         /// <summary>
         /// Unique id
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// Type of this entity. Together with the Id, this forms a unique key across all resources
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "attributes")]
+        [JsonPropertyName("attributes")]
         public InvoiceAttributes Attributes { get; set; }
     }
 }

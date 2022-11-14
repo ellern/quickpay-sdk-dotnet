@@ -1,9 +1,8 @@
-﻿using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
-using QuickPay.SDK.Models.Callbacks;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.Primitives;
+using QuickPay.SDK.Models.Callbacks;
 
 namespace QuickPay.SDK.Clients
 {
@@ -21,7 +20,7 @@ namespace QuickPay.SDK.Clients
         /// </summary>
         /// <param name="requestBody"></param>
         /// <returns></returns>
-        public Callback Deserialize(string requestBody) => requestBody == null ? null : JsonConvert.DeserializeObject<Callback>(requestBody);
+        public Callback Deserialize(string requestBody) => requestBody == null ? null : JSON.Deserialize<Callback>(requestBody);
 
         /// <summary>
         /// 

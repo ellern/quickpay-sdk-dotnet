@@ -1,15 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace QuickPay.SDK.Models.Cards
 {
     public class CardToken
     {
-        [JsonProperty(PropertyName = "token")]
+        [JsonPropertyName("token")]
         public string Token { get; set; }
-        [JsonProperty(PropertyName = "is_used")]
+        [JsonPropertyName("is_used")]
         public bool IsUsed { get; set; }
-        [JsonProperty(PropertyName = "created_at")]
+        [JsonPropertyName("created_at")]
         public DateTime Created { get; set; }
     }
 }

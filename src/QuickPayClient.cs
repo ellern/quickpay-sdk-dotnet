@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using QuickPay.SDK.Clients;
+﻿using QuickPay.SDK.Clients;
 using QuickPay.SDK.Models.Shared;
 using System;
 using System.Collections.Generic;
@@ -97,7 +96,7 @@ namespace QuickPay.SDK
             var request = await _httpClient.PostAsync(Endpoints.Ping(), new FormUrlEncodedContent(form)).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<Pong>(response);
+            return JSON.Deserialize<Pong>(response);
         }
 
         /// <summary>

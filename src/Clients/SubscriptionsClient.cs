@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using QuickPay.SDK.Models.Payments;
 using QuickPay.SDK.Models.Shared;
 using QuickPay.SDK.Models.Subscriptions;
@@ -379,7 +379,7 @@ namespace QuickPay.SDK.Clients
             }
             else
             {
-                return JsonConvert.DeserializeObject<Subscription>(response);
+                return JSON.Deserialize<Subscription>(response);
             }
         }
 

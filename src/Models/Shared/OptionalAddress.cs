@@ -1,36 +1,36 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace QuickPay.SDK.Models.Shared
 {
     public class OptionalAddress
     {
-        [JsonProperty(PropertyName = "name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
-        [JsonProperty(PropertyName = "att")]
+        [JsonPropertyName("att")]
         public string Att { get; set; }
-        [JsonProperty(PropertyName = "street")]
+        [JsonPropertyName("street")]
         public string Street { get; set; }
-        [JsonProperty(PropertyName = "city")]
+        [JsonPropertyName("city")]
         public string City { get; set; }
-        [JsonProperty(PropertyName = "zip_code")]
+        [JsonPropertyName("zip_code")]
         public string ZipCode { get; set; }
-        [JsonProperty(PropertyName = "region")]
+        [JsonPropertyName("region")]
         public string Region { get; set; }
-        [JsonProperty(PropertyName = "country_code")]
+        [JsonPropertyName("country_code")]
         public string CountryCode { get; set; }
-        [JsonProperty(PropertyName = "vat_no")]
+        [JsonPropertyName("vat_no")]
         public string VatNo { get; set; }
-        [JsonProperty(PropertyName = "company_name")]
+        [JsonPropertyName("company_name")]
         public string CompanyName { get; set; }
-        [JsonProperty(PropertyName = "house_number")]
+        [JsonPropertyName("house_number")]
         public string HouseNumber { get; set; }
-        [JsonProperty(PropertyName = "house_extension")]
+        [JsonPropertyName("house_extension")]
         public string HouseExtension { get; set; }
-        [JsonProperty(PropertyName = "phone_number")]
+        [JsonPropertyName("phone_number")]
         public string PhoneNumber { get; set; }
-        [JsonProperty(PropertyName = "mobile_number")]
+        [JsonPropertyName("mobile_number")]
         public string MobileNumber { get; set; }
-        [JsonProperty(PropertyName = "email")]
+        [JsonPropertyName("email")]
         public string Email { get; set; }
     }
 }

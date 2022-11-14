@@ -1,12 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using QuickPay.SDK.Models.Payments;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
+using QuickPay.SDK.Models.Payments;
 
 namespace QuickPay.SDK.Clients
 {
@@ -43,7 +39,7 @@ namespace QuickPay.SDK.Clients
             var request = await PostJson(Endpoints.Payments(paymentId, "session"), data, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<Payment>(response);
+            return JSON.Deserialize<Payment>(response);
         }
 
         public async Task<Payment> Authorize(int paymentId, int amount, string cardToken, bool autoCapture, string callbackUrl)
@@ -76,7 +72,7 @@ namespace QuickPay.SDK.Clients
 
             var request = await PostJson(Endpoints.PaymentsAuthorize(paymentId), data, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Payment>(response);
+            return JSON.Deserialize<Payment>(response);
         }
 
         public Task<Payment> Capture(int paymentId, int amount) => Capture(paymentId, amount, null);
@@ -100,7 +96,7 @@ namespace QuickPay.SDK.Clients
 
             var request = await PostJson(Endpoints.PaymentsCapture(paymentId), data, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Payment>(response);
+            return JSON.Deserialize<Payment>(response);
         }
 
         public Task<Payment> Cancel(int paymentId) => PostEmpty<Payment>(Endpoints.Payments(paymentId, "cancel"));
@@ -126,7 +122,7 @@ namespace QuickPay.SDK.Clients
 
             var request = await PostJson(Endpoints.Payments(paymentId, "refund"), data, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Payment>(response);
+            return JSON.Deserialize<Payment>(response);
         }
 
         public Task<Payment> Renew(int paymentId) => Renew(paymentId, null);
@@ -145,7 +141,7 @@ namespace QuickPay.SDK.Clients
 
             var request = await PostJson(Endpoints.Payments(paymentId, "renew"), (object)null, headers).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Payment>(response);
+            return JSON.Deserialize<Payment>(response);
         }
 
         public Task<Payment> Create(string currency, string orderId, Dictionary<string, string> variables) => Create(currency, orderId, null, variables);
@@ -172,7 +168,7 @@ namespace QuickPay.SDK.Clients
 
             var request = await PostJson(Endpoints.Payments(), data).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Payment>(response);
+            return JSON.Deserialize<Payment>(response);
         }
 
         public async Task<Payment> Update(int paymentId, Dictionary<string, string> variables)
@@ -184,7 +180,7 @@ namespace QuickPay.SDK.Clients
 
             var request = await PatchJson(Endpoints.Payments(paymentId), data).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Payment>(response);
+            return JSON.Deserialize<Payment>(response);
         }
 
         public Task<PaymentLinkUrl> CreateOrUpdatePaymentLink(int paymentId, int amount) => CreateOrUpdatePaymentLink(paymentId, amount, false, false, null, null, null, null, null, false);

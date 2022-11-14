@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using QuickPay.SDK.Models.Payments;
 using QuickPay.SDK.Models.Shared;
 using System;
@@ -13,13 +13,13 @@ namespace QuickPay.SDK.Models.Payouts
         /// <summary>
         /// Merchant ID
         /// </summary>
-        [JsonProperty(PropertyName = "merchant_id")]
+        [JsonPropertyName("merchant_id")]
         public int MerchantId { get; set; }
 
         /// <summary>
         /// Order number
         /// </summary>
-        [JsonProperty(PropertyName = "order_id")]
+        [JsonPropertyName("order_id")]
         public string OrderId { get; set; }
 
         /// <summary>
@@ -35,10 +35,10 @@ namespace QuickPay.SDK.Models.Payouts
         /// <summary>
         /// Text on statement
         /// </summary>
-        [JsonProperty(PropertyName = "text_on_statement")]
+        [JsonPropertyName("text_on_statement")]
         public string Descriptor { get; set; }
 
-        [JsonProperty(PropertyName = "branding_id")]
+        [JsonPropertyName("branding_id")]
         public int? BrandingId { get; set; }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace QuickPay.SDK.Models.Payouts
         /// <summary>
         /// Test mode
         /// </summary>
-        [JsonProperty(PropertyName = "test_mode")]
+        [JsonPropertyName("test_mode")]
         public bool TestMode { get; set; }
 
         /// <summary>
@@ -90,19 +90,19 @@ namespace QuickPay.SDK.Models.Payouts
         /// <summary>
         /// Timestamp of creation ISO-8601
         /// </summary>
-        [JsonProperty(PropertyName = "created_at")]
+        [JsonPropertyName("created_at")]
         public DateTime Created { get; set; }
 
         /// <summary>
         /// Timestamp of last updated ISO-8601
         /// </summary>
-        [JsonProperty(PropertyName = "updated_at")]
+        [JsonPropertyName("updated_at")]
         public DateTime Updated { get; set; }
 
         /// <summary>
         /// Timestamp of retention  ISO-8601
         /// </summary>
-        [JsonProperty(PropertyName = "retented_at")]
+        [JsonPropertyName("retented_at")]
         public DateTime? Retented { get; set; }
 
         /// <summary>

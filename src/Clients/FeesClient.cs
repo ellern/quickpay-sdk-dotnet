@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using QuickPay.SDK.Models.Fees;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -25,7 +25,7 @@ namespace QuickPay.SDK.Clients
             var request = await PostJson(Endpoints.Fees(acquirer, paymentMethod), data).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<CalculatedFee>(response);
+            return JSON.Deserialize<CalculatedFee>(response);
         }
 
         public Task<List<FeeFormula>> GetFeeFormulas() => Get<List<FeeFormula>>(Endpoints.FeesFormulas());

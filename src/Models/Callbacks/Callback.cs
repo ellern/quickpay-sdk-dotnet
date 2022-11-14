@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using QuickPay.SDK.Models.Shared;
 using System;
 using System.Collections.Generic;
@@ -9,20 +9,25 @@ namespace QuickPay.SDK.Models.Callbacks
     {
         public int Id { get; set; }
 
-        [JsonProperty(PropertyName = "merchant_id")]
+        /// <summary>
+        /// Universally-Unique, Lexicographically-Sortable Identifier
+        /// </summary>                
+        public string ULId { get; set; }
+
+        [JsonPropertyName("merchant_id")]
         public int MerchantId { get; set; }
 
-        [JsonProperty(PropertyName = "order_id")]
+        [JsonPropertyName("order_id")]
         public string OrderId { get; set; }
 
         public bool Accepted { get; set; }
 
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "text_on_statement")]
+        [JsonPropertyName("text_on_statement")]
         public string Descriptor { get; set; }
 
-        [JsonProperty(PropertyName = "Branding_id")]
+        [JsonPropertyName("Branding_id")]
         public string BrandingId { get; set; }
 
         public Dictionary<string, string> Variables { get; set; }
@@ -35,10 +40,10 @@ namespace QuickPay.SDK.Models.Callbacks
 
         public Link Link { get; set; }
 
-        [JsonProperty(PropertyName = "shipping_address")]
+        [JsonPropertyName("shipping_address")]
         public OptionalAddress ShippingAddress { get; set; }
 
-        [JsonProperty(PropertyName = "invoice_address")]
+        [JsonPropertyName("invoice_address")]
         public OptionalAddress InvoiceAddress { get; set; }
 
         public Basket[] Basket { get; set; }
@@ -47,27 +52,27 @@ namespace QuickPay.SDK.Models.Callbacks
 
         public Operation[] Operations { get; set; }
 
-        [JsonProperty(PropertyName = "test_mode")]
+        [JsonPropertyName("test_mode")]
         public bool TestMode { get; set; }
 
         public string Acquirer { get; set; }
 
         public string Facilitator { get; set; }
 
-        [JsonProperty(PropertyName = "created_at")]
+        [JsonPropertyName("created_at")]
         public DateTime Created { get; set; }
 
-        [JsonProperty(PropertyName = "updated_at")]
+        [JsonPropertyName("updated_at")]
         public DateTime? Updated { get; set; }
 
-        [JsonProperty(PropertyName = "retented_at")]
+        [JsonPropertyName("retented_at")]
         public DateTime? Retented { get; set; }
 
         public int Balance { get; set; }
 
         public int? Fee { get; set; }
 
-        [JsonProperty(PropertyName = "deadline_at")]
+        [JsonPropertyName("deadline_at")]
         public DateTime? Deadline { get; set; }
 
         [JsonIgnore]

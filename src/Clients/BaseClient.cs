@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -84,23 +85,23 @@ namespace QuickPay.SDK.Clients
             }
         }
 
-        internal virtual async Task<T> Get<T>(Uri endpoint) => JsonConvert.DeserializeObject<T>(await _httpClient.GetStringAsync(endpoint).ConfigureAwait(false));
+        internal virtual async Task<T> Get<T>(Uri endpoint) => JSON.Deserialize<T>(await _httpClient.GetStringAsync(endpoint).ConfigureAwait(false));
 
         internal virtual async Task<T> PostEmpty<T>(Uri endpoint)
         {
-            var request = await _httpClient.PostAsync(endpoint, new StringContent(JsonConvert.SerializeObject(null), Encoding.UTF8, "application/json")).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(await request.Content.ReadAsStringAsync().ConfigureAwait(false));
+            var request = await _httpClient.PostAsync(endpoint, new StringContent(JSON.Serialize(null), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+            return JSON.Deserialize<T>(await request.Content.ReadAsStringAsync().ConfigureAwait(false));
         }
 
         internal virtual Task<HttpResponseMessage> PutForm(Uri endpoint, IEnumerable<KeyValuePair<string, string>> data) => _httpClient.PutAsync(endpoint, new FormUrlEncodedContent(data));
 
-        internal virtual Task<HttpResponseMessage> PostJson(Uri endpoint) => _httpClient.PostAsync(endpoint, new StringContent(JsonConvert.SerializeObject(null), Encoding.UTF8, "application/json"));
+        internal virtual Task<HttpResponseMessage> PostJson(Uri endpoint) => _httpClient.PostAsync(endpoint, new StringContent(JSON.Serialize(null), Encoding.UTF8, "application/json"));
 
-        internal virtual Task<HttpResponseMessage> PostJson<T>(Uri endpoint, T data) => _httpClient.PostAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+        internal virtual Task<HttpResponseMessage> PostJson<T>(Uri endpoint, T data) => _httpClient.PostAsync(endpoint, new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json"));
 
         internal virtual Task<HttpResponseMessage> PostJson<T>(Uri endpoint, T data, Dictionary<string, string> headers)
         {
-            var stringContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            var stringContent = new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json");
 
             if (headers != null)
             {
@@ -113,19 +114,22 @@ namespace QuickPay.SDK.Clients
             return _httpClient.PostAsync(endpoint, stringContent);
         }
 
-        //internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.PatchAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")); // Patch extension only available in netstandard2.1
-        internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json") });
+#if NETSTANDARD2_1_OR_GREATER
+        internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.PatchAsync(endpoint, new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json"));
+#else
+        internal virtual Task<HttpResponseMessage> PatchJson(Uri endpoint, object data) => _httpClient.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json") });
+#endif
 
         internal virtual async Task<T> PostJson<T>(Uri endpoint, Dictionary<string, object> data)
         {
-            var request = await _httpClient.PostAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+            var request = await _httpClient.PostAsync(endpoint, new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json")).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(response);
+            return JSON.Deserialize<T>(response);
         }
 
         internal virtual async Task<T> PostJson<T>(Uri endpoint, Dictionary<string, object> data, Dictionary<string, string> headers)
         {
-            var stringContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            var stringContent = new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json");
 
             if (headers != null)
             {
@@ -137,22 +141,26 @@ namespace QuickPay.SDK.Clients
 
             var request = await _httpClient.PostAsync(endpoint, stringContent).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(response);
+            return JSON.Deserialize<T>(response);
         }
 
         internal virtual async Task<T> PatchJson<T>(Uri endpoint, Dictionary<string, object> data)
         {
-            //var request = await _httpClient.PatchAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")).ConfigureAwait(false); // Patch extension only available in netstandard2.1
-            var request = await _httpClient.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json") }).ConfigureAwait(false);
+#if NETSTANDARD2_1_OR_GREATER
+            var request = await _httpClient.PatchAsync(endpoint, new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+#else
+            var request = await _httpClient.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json") }).ConfigureAwait(false);
+#endif
+
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(response);
+            return JSON.Deserialize<T>(response);
         }
 
         internal virtual async Task<T> PutJson<T>(Uri endpoint, Dictionary<string, object> data)
         {
-            var request = await _httpClient.PutAsync(endpoint, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+            var request = await _httpClient.PutAsync(endpoint, new StringContent(JSON.Serialize(data), Encoding.UTF8, "application/json")).ConfigureAwait(false);
             var response = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(response);
+            return JSON.Deserialize<T>(response);
         }
 
         internal virtual async Task<bool> Delete(Uri endpoint) => (await _httpClient.DeleteAsync(endpoint).ConfigureAwait(false)).IsSuccessStatusCode;
@@ -175,13 +183,7 @@ namespace QuickPay.SDK.Clients
 
         void SerializeJsonIntoStream(object value, Stream stream)
         {
-            using (var sw = new StreamWriter(stream, new UTF8Encoding(false), 1024, true))
-            using (var jtw = new JsonTextWriter(sw) { Formatting = Formatting.None })
-            {
-                var js = new JsonSerializer();
-                js.Serialize(jtw, value);
-                jtw.Flush();
-            }
+            JSON.Serialize(stream, value);
         }
 
         T DeserializeJsonFromStream<T>(Stream stream)
@@ -189,13 +191,7 @@ namespace QuickPay.SDK.Clients
             if (stream == null || stream.CanRead == false)
                 return default(T);
 
-            using (var sr = new StreamReader(stream))
-            using (var jtr = new JsonTextReader(sr))
-            {
-                var js = new JsonSerializer();
-                var searchResult = js.Deserialize<T>(jtr);
-                return searchResult;
-            }
+            return JSON.Deserialize<T>(stream);
         }
 
         async Task<string> StreamToStringAsync(Stream stream)
@@ -221,7 +217,7 @@ namespace QuickPay.SDK.Clients
             }
 
             var content = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var errors = JsonConvert.DeserializeObject<ValidationErrors>(content);
+            var errors = JSON.Deserialize<ValidationErrors>(content);
 
             var sb = new StringBuilder();
             sb.AppendLine(errors.Message);
@@ -249,7 +245,7 @@ namespace QuickPay.SDK.Clients
     {
         public string Message { get; set; }
         public Dictionary<string, string[]> Errors { get; set; }
-        [JsonProperty(PropertyName = "error_code")]
+        [JsonPropertyName("error_code")]
         public object ErrorCode { get; set; }
     }
 

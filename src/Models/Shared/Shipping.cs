@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace QuickPay.SDK.Models.Shared
 {
@@ -7,32 +7,32 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// Delivery method
         /// </summary>
-        [JsonProperty(PropertyName = "method")]
+        [JsonPropertyName("method")]
         public string Method { get; set; }
         /// <summary>
         /// Delivery company
         /// </summary>
-        [JsonProperty(PropertyName = "company")]
+        [JsonPropertyName("company")]
         public string Company { get; set; }
         /// <summary>
         /// elivery price
         /// </summary>
-        [JsonProperty(PropertyName = "amount")]
+        [JsonPropertyName("amount")]
         public int Amount { get; set; }
         /// <summary>
         /// Delivery VAT rate
         /// </summary>
-        [JsonProperty(PropertyName = "vat_rate")]
+        [JsonPropertyName("vat_rate")]
         public int VatRate { get; set; }
         /// <summary>
         /// Tracking number
         /// </summary>
-        [JsonProperty(PropertyName = "tracking_number")]
+        [JsonPropertyName("tracking_number")]
         public string TrackingNumber { get; set; }
         /// <summary>
         /// Link to delivery status page
         /// </summary>
-        [JsonProperty(PropertyName = "tracking_url")]
+        [JsonPropertyName("tracking_url")]
         public string TrackingUrl { get; set; }
     }
 }

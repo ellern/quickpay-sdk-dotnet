@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace QuickPay.SDK.Models.Shared
@@ -8,22 +8,22 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// Friendly message
         /// </summary>
-        [JsonProperty(PropertyName = "msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; }
         /// <summary>
         /// API scope - e.g. anonymous, user, merchant, reseller
         /// </summary>
-        [JsonProperty(PropertyName = "scope")]
+        [JsonPropertyName("scope")]
         public string Scope { get; set; }
         /// <summary>
         /// Version used for the request - e.g. 'v10'
         /// </summary>
-        [JsonProperty(PropertyName = "version")]
+        [JsonPropertyName("version")]
         public string Version { get; set; }
         /// <summary>
         /// Echo params send in the request
         /// </summary>
-        [JsonProperty(PropertyName = "params")]
+        [JsonPropertyName("params")]
         public Dictionary<string, string> Parameters { get; set; }
     }
 }

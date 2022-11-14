@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using QuickPay.SDK.Models.Shared;
 
 namespace QuickPay.SDK.Models.Payments
@@ -12,12 +12,12 @@ namespace QuickPay.SDK.Models.Payments
         /// <summary>
         /// If true, will add acquirer fee to the amount
         /// </summary>
-        [JsonProperty(PropertyName = "auto_fee")]
+        [JsonPropertyName("auto_fee")]
         public bool? AutoFee { get; set; }
         /// <summary>
         /// If true, will capture the transaction after authorize succeeds
         /// </summary>
-        [JsonProperty(PropertyName = "auto_capture")]
+        [JsonPropertyName("auto_capture")]
         public bool? AutoCapture { get; set; }
         /// <summary>
         /// Deadline in seconds for the cardholder to complete
@@ -26,17 +26,17 @@ namespace QuickPay.SDK.Models.Payments
         /// <summary>
         /// Get customer invoice address via acquirer (Currently MobilePay and PayPal only)
         /// </summary>
-        [JsonProperty(PropertyName = "invoice_address_selection")]
+        [JsonPropertyName("invoice_address_selection")]
         public bool? InvoiceAddressSelection { get; set; }
         /// <summary>
         /// Get customer shipping address via acquirer (Currently MobilePay and PayPal only)
         /// </summary>
-        [JsonProperty(PropertyName = "shipping_address_selection")]
+        [JsonPropertyName("shipping_address_selection")]
         public bool? ShippingAddressSelection { get; set; }
         /// <summary>
         /// PayPal specific: Customer email
         /// </summary>
-        [JsonProperty(PropertyName = "customer_email")]
+        [JsonPropertyName("customer_email")]
         public string CustomerEmail { get; set; }
     }
 }

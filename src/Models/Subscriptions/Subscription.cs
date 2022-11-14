@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using QuickPay.SDK.Models.Payments;
 using QuickPay.SDK.Models.Shared;
 using System;
@@ -12,13 +12,13 @@ namespace QuickPay.SDK.Models.Subscriptions
         /// <summary>
         /// Merchant Id
         /// </summary>
-        [JsonProperty(PropertyName = "merchant_id")]
+        [JsonPropertyName("merchant_id")]
         public int MerchantId { get; set; }
 
         /// <summary>
         /// Order number
         /// </summary>
-        [JsonProperty(PropertyName = "order_id")]
+        [JsonPropertyName("order_id")]
         public string OrderId { get; set; }
 
         /// <summary>
@@ -34,13 +34,13 @@ namespace QuickPay.SDK.Models.Subscriptions
         /// <summary>
         /// Text on statement
         /// </summary>
-        [JsonProperty(PropertyName = "text_on_statement")]
+        [JsonPropertyName("text_on_statement")]
         public string Descriptor { get; set; }
 
         /// <summary>
         /// Branding Id
         /// </summary>
-        [JsonProperty(PropertyName = "branding_id")]
+        [JsonPropertyName("branding_id")]
         public int? BrandingId { get; set; }
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace QuickPay.SDK.Models.Subscriptions
         public PaymentLink PaymentLink { get; set; }
 
         //shipping_address Shipping address set on payment creation OptionalAddress
-        [JsonProperty(PropertyName = "shipping_address")]
+        [JsonPropertyName("shipping_address")]
         public OptionalAddress ShippingAddress { get; set; }
 
         //invoice_address Invoice address set on payment creation OptionalAddress
-        [JsonProperty(PropertyName = "invoice_address")]
+        [JsonPropertyName("invoice_address")]
         public OptionalAddress InvoiceAddress { get; set; }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace QuickPay.SDK.Models.Subscriptions
         /// <summary>
         /// Test mode
         /// </summary>
-        [JsonProperty(PropertyName = "test_mode")]
+        [JsonPropertyName("test_mode")]
         public bool TestMode { get; set; }
 
         /// <summary>
@@ -106,19 +106,19 @@ namespace QuickPay.SDK.Models.Subscriptions
         /// <summary>
         /// Timestamp of creation
         /// </summary>
-        [JsonProperty(PropertyName = "created_at")]
+        [JsonPropertyName("created_at")]
         public DateTime Created { get; set; }
 
         /// <summary>
         /// Timestamp of last updated
         /// </summary>
-        [JsonProperty(PropertyName = "updated_at")]
+        [JsonPropertyName("updated_at")]
         public DateTime Updated { get; set; }
 
         /// <summary>
         /// Timestamp of retention
         /// </summary>
-        [JsonProperty(PropertyName = "retented_at")]
+        [JsonPropertyName("retented_at")]
         public DateTime? Retented { get; set; }
 
         /// <summary>
@@ -129,13 +129,13 @@ namespace QuickPay.SDK.Models.Subscriptions
         /// <summary>
         /// Ids of subscription groups
         /// </summary>
-        [JsonProperty(PropertyName = "group_ids")]
+        [JsonPropertyName("group_ids")]
         public int[] GroupIds { get; set; }
 
         /// <summary>
         /// Authorize deadline  ISO-8601
         /// </summary>
-        [JsonProperty(PropertyName = "deadline_at")]
+        [JsonPropertyName("deadline_at")]
         public DateTime? Deadline { get; set; }
     }
 }

@@ -1,18 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace QuickPay.SDK.Models.Shared
 {
     public class Basket
     {
-        [JsonProperty(PropertyName = "qty")]
+        [JsonPropertyName("qty")]
         public int Quantity { get; set; }
-        [JsonProperty(PropertyName = "item_no")]
+        [JsonPropertyName("item_no")]
         public string ItemNo { get; set; }
-        [JsonProperty(PropertyName = "item_name")]
+        [JsonPropertyName("item_name")]
         public string ItemName { get; set; }
-        [JsonProperty(PropertyName = "item_price")]
+        [JsonPropertyName("item_price")]
         public int ItemPrice { get; set; }
-        [JsonProperty(PropertyName = "vat_rate")]
+        [JsonPropertyName("vat_rate")]
         public int VatRate { get; set; }
     }
 }

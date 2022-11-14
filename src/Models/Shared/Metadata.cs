@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace QuickPay.SDK.Models.Shared
@@ -24,7 +24,7 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// Card type only: Corporate status
         /// </summary>
-        [JsonProperty(PropertyName = "corporate")]
+        [JsonPropertyName("corporate")]
         public bool? IsCorporate { get; set; }
         /// <summary>
         /// Card type only: The last 4 digits of the card number
@@ -33,12 +33,12 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// Card type only: The expiration month
         /// </summary>
-        [JsonProperty(PropertyName = "exp_month")]
+        [JsonPropertyName("exp_month")]
         public int? ExpiryMonth { get; set; }
         /// <summary>
         /// Card type only: The expiration year (YYYY)
         /// </summary>
-        [JsonProperty(PropertyName = "exp_year")]
+        [JsonPropertyName("exp_year")]
         public int? ExpiryYear { get; set; }
         /// <summary>
         /// Card type only: The card country in ISO 3166-1 alpha-3
@@ -47,12 +47,22 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// Card type only: Verified via 3D-Secure
         /// </summary>
-        [JsonProperty(PropertyName = "is_3d_secure")]
-        public bool? Is3DSecure { get; set; }
+        [Obsolete("Use IsSCA instead. This will be removed in a future version")]
+        public bool? Is3DSecure { get { return IsSCA; } }
+        /// <summary>
+        /// Card type only: Verified via 3D-Secure
+        /// </summary>
+        [JsonPropertyName("is_3d_secure")]
+        public bool? IsSCA { get; set; }
+        /// <summary>
+        /// Card type only: 3-D version or type if V2
+        /// </summary>
+        [JsonPropertyName("3d_secure_type")]
+        public string SCAType { get; set; }
         /// <summary>
         /// Name of cardholder
         /// </summary>
-        [JsonProperty(PropertyName = "issued_to")]
+        [JsonPropertyName("issued_to")]
         public string IssuedTo { get; set; }
         /// <summary>
         /// Card type only: PCI safe hash of card number
@@ -65,62 +75,62 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// Customer IP
         /// </summary>
-        [JsonProperty(PropertyName = "customer_ip")]
+        [JsonPropertyName("customer_ip")]
         public string CustomerIPAddress { get; set; }
         /// <summary>
         /// Customer country based on IP geo-data, ISO 3166-1 alpha-2
         /// </summary>
-        [JsonProperty(PropertyName = "customer_country")]
+        [JsonPropertyName("customer_country")]
         public string CustomerCountry { get; set; }
         /// <summary>
         /// Suspected fraud
         /// </summary>
-        [JsonProperty(PropertyName = "fraud_suspected")]
+        [JsonPropertyName("fraud_suspected")]
         public bool FraudSuspected { get; set; }
         /// <summary>
         /// Fraud remarks
         /// </summary>
-        [JsonProperty(PropertyName = "fraud_remarks")]
+        [JsonPropertyName("fraud_remarks")]
         public string[] FraudRemarks { get; set; }
         /// <summary>
         /// Reported as fraudulent
         /// </summary>
-        [JsonProperty(PropertyName = "fraud_reported")]
+        [JsonPropertyName("fraud_reported")]
         public bool FraudReported { get; set; }
         /// <summary>
         /// Fraud report description
         /// </summary>
-        [JsonProperty(PropertyName = "fraud_report_description")]
+        [JsonPropertyName("fraud_report_description")]
         public string FraudReportDescription { get; set; }
         /// <summary>
         /// Fraud reported at
         /// </summary>
-        [JsonProperty(PropertyName = "fraud_reported_at")]
+        [JsonPropertyName("fraud_reported_at")]
         public DateTime? FraudReportedAt { get; set; }
         /// <summary>
         /// NIN type only. NIN number
         /// </summary>
-        [JsonProperty(PropertyName = "nin_number")]
+        [JsonPropertyName("nin_number")]
         public string NINNumber { get; set; }
         /// <summary>
         /// NIN type only. NIN country code, ISO 3166-1 alpha-3
         /// </summary>
-        [JsonProperty(PropertyName = "nin_country_code")]
+        [JsonPropertyName("nin_country_code")]
         public string NINCountryCode { get; set; }
         /// <summary>
         /// NIN type only. NIN gender
         /// </summary>
-        [JsonProperty(PropertyName = "nin_gender")]
+        [JsonPropertyName("nin_gender")]
         public string NINGender { get; set; }
         /// <summary>
         /// Shop system module name
         /// </summary>
-        [JsonProperty(PropertyName = "shopsystem_name")]
+        [JsonPropertyName("shopsystem_name")]
         public string ShopSystemName { get; set; }
         /// <summary>
         /// Shop system module version
         /// </summary>
-        [JsonProperty(PropertyName = "shopsystem_version")]
+        [JsonPropertyName("shopsystem_version")]
         public string ShopSystemVersion { get; set; }
 
     }

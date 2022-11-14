@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace QuickPay.SDK.Models.Invoices
@@ -8,7 +8,7 @@ namespace QuickPay.SDK.Models.Invoices
         /// <summary>
         /// Lines of the order
         /// </summary>
-        [JsonProperty(PropertyName = "lines")]
+        [JsonPropertyName("lines")]
         public List<InvoiceOrderLine> Lines { get; set; }
     }
 }

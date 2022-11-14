@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -14,7 +14,7 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// Amount
         /// </summary>
-        [JsonProperty(PropertyName = "amount")]
+        [JsonPropertyName("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
@@ -30,55 +30,55 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// Acquirer specific data
         /// </summary>
-        [JsonProperty(PropertyName = "data")]
+        [JsonPropertyName("data")]
         public Dictionary<string, string> Data { get; set; }
 
         /// <summary>
         /// QuickPay status code
         /// </summary>
-        [JsonProperty(PropertyName = "qp_status_code")]
+        [JsonPropertyName("qp_status_code")]
         public string QuickPayStatusCode { get; set; }
 
         /// <summary>
         /// QuickPay status message
         /// </summary>
-        [JsonProperty(PropertyName = "qp_status_msg")]
+        [JsonPropertyName("qp_status_msg")]
         public string QuickPayStatusMessage { get; set; }
 
         /// <summary>
         /// Acquirer status code
         /// </summary>
-        [JsonProperty(PropertyName = "aq_status_code")]
+        [JsonPropertyName("aq_status_code")]
         public string AcquirerStatusCode { get; set; }
 
         /// <summary>
         /// Acquirer status message
         /// </summary>
-        [JsonProperty(PropertyName = "aq_status_msg")]
+        [JsonPropertyName("aq_status_msg")]
         public string AcquirerStatusMessage { get; set; }
 
         /// <summary>
         /// Operation callback url
         /// </summary>
-        [JsonProperty(PropertyName = "callback_url")]
+        [JsonPropertyName("callback_url")]
         public string CallbackUrl { get; set; }
 
         /// <summary>
         /// Did the callback succeed
         /// </summary>
-        [JsonProperty(PropertyName = "callback_success")]
+        [JsonPropertyName("callback_success")]
         public bool? CallbackSuccess { get; set; }
 
         /// <summary>
         /// The http response code from the callback operation
         /// </summary>
-        [JsonProperty(PropertyName = "callback_response_code")]
+        [JsonPropertyName("callback_response_code")]
         public string CallbackResponseCode { get; set; }
 
         /// <summary>
         /// Callback duration(ms)
         /// </summary>
-        [JsonProperty(PropertyName = "callback_duration")]
+        [JsonPropertyName("callback_duration")]
         public int? CallbackDuration { get; set; }
 
         /// <summary>
@@ -89,19 +89,19 @@ namespace QuickPay.SDK.Models.Shared
         /// <summary>
         /// 3D Secure status
         /// </summary>
-        [JsonProperty(PropertyName = "3d_secure_status")]
+        [JsonPropertyName("3d_secure_status")]
         public string SecureStatus { get; set; }
 
         /// <summary>
         /// Timestamp of callback
         /// </summary>
-        [JsonProperty(PropertyName = "callback_at")]
+        [JsonPropertyName("callback_at")]
         public DateTime? Callback { get; set; }
 
         /// <summary>
         /// Timestamp of creation
         /// </summary>
-        [JsonProperty(PropertyName = "created_at")]
+        [JsonPropertyName("created_at")]
         public DateTime Created { get; set; }
 
     }

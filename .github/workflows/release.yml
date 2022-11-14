@@ -21,7 +21,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Pack with dotnet
-      run: dotnet pack --configuration Release
+      run: dotnet pack --configuration Release --no-build
 
     - name: Push to NuGet
       env:
